@@ -1,5 +1,6 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
+var table = require("cli-table")
 
 var connection = mysql.createConnection({
   host: "127.0.0.1",
@@ -13,24 +14,30 @@ var connection = mysql.createConnection({
   database: "bAmazon_db"
 });
 
+function display(){
+	connection.connect(function(err) {
+		if (err) throw errr;
+		//console.log("connected as id " + connection.threadId);
+		connection.query("SELECT * FROM products", function(err, res){
+			if(err) {
+				console.log(err);
+			}
+			console.log("Welcome to B-Amazon!");
+			console.log("Check out our items!");
+			var tableDisplay = new table({
+				head: ["Item ID" , "Product Name" , "Department Name" , "Price" , "Stock Quantity"],
+				colWidths: [10, 30, 18, 10, 20]
 
+			});
+			for (var i = 0; i < res.length; i++){
+				tableDisplay.push([res[i].item_id, res[i].product_name, res[i].department_name, res[i].price, res[i].stock_quanity]);
+			}
+			console.log(tableDisplay.toString());
+			ask();
+		})
+	});
+}
 
-connection.connect(function(err) {
-  if (err) throw err;
-  console.log("connected as id " + connection.threadId);
-  	connection.query("SELECT * FROM products", function(err, res){
-		if(err) {
-			console.log(err);
-		}
-		console.log("Welcome to B-Amazon!");
-		console.log("Check out our items!");
-		for (var i = 0; i < res.length; i++){
-			console.log(res[i].item_id + " | | " + res[i].product_name + " | | " + res[i].department_name + " | | " + res[i].price + " | | " + res[i].stock_quanity);
-			console.log("----------------------------------");
-		}
-		ask();
-	})
-});
 
 function ask() {
 	inquirer.prompt([{
@@ -43,7 +50,7 @@ function ask() {
 			showList();
 		}
 		else {
-			console.log("Aw hope to see you soon!");
+			console.log("Aww hope to see you soon!");
 			connection.end();
 		}
 	})
@@ -52,3 +59,5 @@ function ask() {
 function showList() {
 
 }
+
+display();

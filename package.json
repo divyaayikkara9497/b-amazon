@@ -19,6 +19,8 @@
   "homepage": "https://github.com/divyaayikkara9497/b-amazon#readme",
   "dependencies": {
     "all": "0.0.0",
+    "cli": "^1.0.1",
+    "cli-table": "^0.3.1",
     "mysql": "^2.15.0"
   }
 }
