@@ -1,0 +1,29 @@
+CREATE DATABASE bAmazon_db;
+
+USE bAmazon_db;
+
+DROP TABLE IF EXISTS products;
+
+CREATE TABLE products(
+item_id INT NOT NULL AUTO_INCREMENT,
+product_name VARCHAR(100) NOT NULL,
+department_name VARCHAR(45) NOT NULL,
+price INT default 0,
+stock_quanity INT default 0,
+PRIMARY KEY (item_id)
+);
+
+INSERT INTO products(product_name, department_name, price, stock_quanity)
+VALUES 
+	("Harry Potter and the Sorcerer's Stone" , "Books" , 26 , 3),
+    ("Gone Girl" , "Books" , 12 , 15),
+    ("XBOX" , "Electronics" , 350 , 10),
+    ("Fight Club" , "Movies" , 2.59 ,  45),
+    ("The Office" , "TV Shows" , 14.99 , 23),
+    ("Game of Thrones" , "Books" , 25.99 , 56),
+    ("iPhone X" , "Electronics" , 1400, 3),
+    ("MacBook Air" , "Electronics" , 1990, 45);
+    
+SELECT * FROM products;
+
+ 
